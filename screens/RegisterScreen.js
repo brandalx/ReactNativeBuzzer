@@ -1,21 +1,23 @@
 import {
   View,
-  Text,
   KeyboardAvoidingView,
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { Input } from "react-native-elements";
+import { Button, Input, Text } from "react-native-elements";
 
 const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-
+  useLayoutEffect(() => {
+    navigation.setOptions({ headerBackTitle: " Login" });
+  }, [navigation]);
+  const register = () => {};
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
@@ -48,8 +50,16 @@ const RegisterScreen = ({ navigation }) => {
             type="text"
             value={imageUrl}
             onChangeText={(text) => setImageUrl(text)}
+            onSubmitEditing={register}
           />
         </View>
+        <Button
+          style={styles.button}
+          raised
+          title="Register"
+          onPress={register}
+        />
+        <View style={{ height: 100 }} />
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
@@ -59,6 +69,9 @@ export default RegisterScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
-  inputContainer: {},
+  inputContainer: { width: 200 },
+  button: { width: 200, marginTop: 10 },
 });
