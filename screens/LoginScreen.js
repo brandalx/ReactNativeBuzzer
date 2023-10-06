@@ -1,6 +1,8 @@
 import { View, Text, StyleSheet } from "react-native";
 import React, { useState } from "react";
 import { Button, Input, Image } from "react-native-elements";
+import tw from "twrnc";
+
 import { StatusBar } from "expo-status-bar";
 const LoginScreen = () => {
   const [email, setEmial] = useState("");
@@ -31,6 +33,10 @@ const LoginScreen = () => {
           type="Password"
         />
       </View>
+      <View>
+        <Button style={tw`my-2`} title="Login" />
+        <Button style={tw`my-2`} title="Register" type="outline" />
+      </View>
     </View>
   );
 };
@@ -39,4 +45,5 @@ export default LoginScreen;
 
 const styles = StyleSheet.create({
   inputContainer: {},
+  button: {},
 });
