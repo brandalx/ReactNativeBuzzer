@@ -1,8 +1,10 @@
 import { View, Text, StyleSheet } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { Button, Input, Image } from "react-native-elements";
 import { StatusBar } from "expo-status-bar";
 const LoginScreen = () => {
+  const [email, setEmial] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <View>
       <StatusBar style="light" />
@@ -13,8 +15,16 @@ const LoginScreen = () => {
         style={{ width: 200, height: 200 }}
       />
       <View style={StyleSheet.inputContainer}>
-        <Input placeholder="Email" autoFocus type="Email" />
         <Input
+          value={email}
+          onChangeText={(text) => setEmial(text)}
+          placeholder="Email"
+          autoFocus
+          type="Email"
+        />
+        <Input
+          onTextInput={(text) => setPassword(text)}
+          value={password}
           placeholder="Password"
           secureTextEntry
           autoFocus
