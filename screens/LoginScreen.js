@@ -11,7 +11,7 @@ import { Button, Input, Image } from "react-native-elements";
 import tw from "twrnc";
 
 import { StatusBar } from "expo-status-bar";
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
   const [email, setEmial] = useState("");
   const [password, setPassword] = useState("");
   const signIn = () => {};
@@ -50,7 +50,12 @@ const LoginScreen = () => {
           </View>
           <View>
             <Button onPress={signIn} style={tw`my-2`} title="Login" />
-            <Button style={tw`my-2`} title="Register" type="outline" />
+            <Button
+              style={tw`my-2`}
+              title="Register"
+              type="outline"
+              onPress={() => navigation.navigate("Register")}
+            />
             <View style={{ height: 200 }} />
           </View>
         </View>
