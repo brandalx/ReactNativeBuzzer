@@ -9,6 +9,7 @@ import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Button, Input, Text } from "react-native-elements";
 import { auth } from "../firebase";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 // import { auth } from "../firebase";
 
 const RegisterScreen = ({ navigation }) => {
@@ -20,10 +21,14 @@ const RegisterScreen = ({ navigation }) => {
     navigation.setOptions({ headerBackTitle: " Login" });
   }, [navigation]);
   const register = () => {
-    auth
-      .createUserWithEmailAndPassword(email, password)
+    createUserWithEmailAndPassword(auth, email, password)
       .then((authUser) => {
-        console.log(ok);
+        updateProfile(authUser.user, {
+          displayName: name,
+          photoURL:
+            imageUrl ||
+            "https://cdn-icons-png.flaticon.com/512/1144/1144760.png",
+        });
       })
       .catch((error) => alert(error.message));
   };
