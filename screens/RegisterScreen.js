@@ -8,6 +8,8 @@ import {
 import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Button, Input, Text } from "react-native-elements";
+import { auth } from "../firebase";
+// import { auth } from "../firebase";
 
 const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -17,7 +19,15 @@ const RegisterScreen = ({ navigation }) => {
   useLayoutEffect(() => {
     navigation.setOptions({ headerBackTitle: " Login" });
   }, [navigation]);
-  const register = () => {};
+  const register = () => {
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((authUser) => {
+        console.log(ok);
+      })
+      .catch((error) => alert(error.message));
+  };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
@@ -53,6 +63,7 @@ const RegisterScreen = ({ navigation }) => {
             onSubmitEditing={register}
           />
         </View>
+
         <Button
           style={styles.button}
           raised
