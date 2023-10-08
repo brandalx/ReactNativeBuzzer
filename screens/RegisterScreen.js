@@ -8,7 +8,7 @@ import {
 import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Button, Input, Text } from "react-native-elements";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 // import { auth } from "../firebase";
 
@@ -91,3 +91,26 @@ const styles = StyleSheet.create({
   inputContainer: { width: 200 },
   button: { width: 200, marginTop: 10 },
 });
+
+//for future usage
+
+// const register = () => {
+//   createUserWithEmailAndPassword(auth, email, password)
+//     .then((authUser) => {
+//       updateProfile(authUser.user, {
+//         displayName: name,
+//         photoURL:
+//           imageUrl || "https://cdn-icons-png.flaticon.com/512/1144/1144760.png",
+//       });
+//       return addDoc(collection(db, "users"), {
+//         uid: authUser.user.uid,
+//         name: name,
+//         email: email,
+//         imageUrl: imageUrl,
+//       });
+//     })
+//     .then(() => {
+//       console.log("User added to Firestore!");
+//     })
+//     .catch((error) => alert(error.message));
+// };
