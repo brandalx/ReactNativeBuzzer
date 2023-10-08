@@ -6,14 +6,27 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Input, Image } from "react-native-elements";
 import tw from "twrnc";
 
 import { StatusBar } from "expo-status-bar";
+import { auth } from "../firebase";
+import { onAuthStateChanged } from "firebase/auth";
 const LoginScreen = ({ navigation }) => {
   const [email, setEmial] = useState("");
   const [password, setPassword] = useState("");
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigation.replace("Home");
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
   const signIn = () => {};
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
