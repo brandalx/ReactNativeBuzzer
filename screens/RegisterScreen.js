@@ -58,7 +58,7 @@ const RegisterScreen = ({ navigation }) => {
             placeholder="Password"
             type="password"
             value={password}
-            onChangeText={(text) => setPassword(text)}
+            onChangeText={(text) => setPassword(text.toString())}
           />
           <Input
             placeholder="Profile picture URL (optional)"
