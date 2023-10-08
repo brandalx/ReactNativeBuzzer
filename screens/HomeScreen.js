@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import React, { useEffect } from "react";
 import { Button } from "react-native-elements";
 import { auth } from "../firebase";
@@ -28,11 +28,12 @@ const HomeScreen = ({ navigation }) => {
     };
   }, []);
   return (
-    <View>
+    <SafeAreaView>
       <Text>
         <Button title="Logout" onPress={handleSignIut} />
+        <ScrollView></ScrollView>
       </Text>
-    </View>
+    </SafeAreaView>
   );
 };
 
