@@ -3,13 +3,14 @@ import React from "react";
 import { ListItem, Avatar } from "react-native-elements";
 const CustomListItem = () => {
   return (
-    <ListItem>
+    <ListItem containerStyle={{ backgroundColor: "white", width: 1000 }}>
       <Avatar
         rounded
         source={{
-          uri: "https://cdn-icons-png.flaticon.com/512/1144/1144760.png",
+          uri: "https://www.pngmart.com/files/23/Profile-PNG-HD.png",
         }}
       />
+      <Text>User name</Text>
     </ListItem>
   );
 };

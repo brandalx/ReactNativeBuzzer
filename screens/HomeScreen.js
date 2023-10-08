@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { Button } from "react-native-elements";
 import { auth } from "../firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
+import CustomListItem from "../components/CustomListItem";
 
 const HomeScreen = ({ navigation }) => {
   const handleSignIut = () => {
@@ -28,11 +29,15 @@ const HomeScreen = ({ navigation }) => {
     };
   }, []);
   return (
-    <SafeAreaView>
-      <Text>
-        <Button title="Logout" onPress={handleSignIut} />
-        <ScrollView></ScrollView>
-      </Text>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
+      <ScrollView>
+        <CustomListItem />
+        <CustomListItem />
+        <CustomListItem />
+        <CustomListItem />
+        <CustomListItem />
+      </ScrollView>
+      <Button title="Logout" onPress={handleSignIut} />
     </SafeAreaView>
   );
 };
