@@ -22,7 +22,15 @@ export default function App() {
       {/* <StatusBar style="auto" hidden={true} /> */}
       <NavigationContainer>
         <SafeAreaProvider>
-          <Stack.Navigator screenOptions={globalScreenOptions}>
+          <Stack.Navigator
+            screenOptions={globalScreenOptions}
+            initialRouteName="Home"
+          >
+            <Stack.Screen
+              name="Home"
+              // options={{ title: "Sign up" }}
+              component={HomeScreen}
+            />
             <Stack.Screen
               name="Login"
               // options={{ title: "Sign up" }}
@@ -32,11 +40,6 @@ export default function App() {
               name="Register"
               // options={{ title: "Sign up" }}
               component={RegisterScreen}
-            />
-            <Stack.Screen
-              name="Home"
-              // options={{ title: "Sign up" }}
-              component={HomeScreen}
             />
           </Stack.Navigator>
           {/* <View style={styles.container}>
