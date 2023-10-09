@@ -40,8 +40,8 @@ const LoginScreen = ({ navigation }) => {
       <KeyboardAvoidingView
         style={styles.container}
         enabled
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={Platform.OS === "ios" ? -100 : 0}
+        // behavior={Platform Platform?.OS === "ios" ? "padding" : "height" :""}
+        // keyboardVerticalOffset={Platform?.OS === "ios" ? -100 : 0}
       >
         <View>
           <StatusBar style="light" />
