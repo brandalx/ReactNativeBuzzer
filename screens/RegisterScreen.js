@@ -55,6 +55,7 @@ const RegisterScreen = ({ navigation }) => {
             onChangeText={(text) => setEmail(text)}
           />
           <Input
+            secureTextEntry={true}
             placeholder="Password"
             type="password"
             value={password}
