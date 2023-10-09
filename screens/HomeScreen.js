@@ -11,6 +11,7 @@ import { Avatar, Button } from "react-native-elements";
 import { auth } from "../firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import CustomListItem from "../components/CustomListItem";
+import { AntDesign, SimpleLineIcons } from "@expo/vector-icons";
 
 const HomeScreen = ({ navigation }) => {
   const handleSignIut = () => {
@@ -44,8 +45,31 @@ const HomeScreen = ({ navigation }) => {
       headerTintColor: { color: "black" },
       headerLeft: () => (
         <View style={{ marginLeft: 20 }}>
-          <TouchableOpacity>
+          <TouchableOpacity activeOpacity={0.5}>
             <Avatar source={{ uri: auth?.currentUser?.photoURL }} rounded />
+          </TouchableOpacity>
+        </View>
+      ),
+      headerRight: () => (
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            width: 80,
+            marginRight: 20,
+          }}
+        >
+          <TouchableOpacity
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+            activeOpacity={0.5}
+          >
+            <AntDesign
+              style={{ marginRight: 10 }}
+              name="camerao"
+              size={24}
+              color="black"
+            />
+            <SimpleLineIcons name="pencil" size={24} color="black" />
           </TouchableOpacity>
         </View>
       ),
