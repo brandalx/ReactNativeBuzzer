@@ -59,22 +59,21 @@ const HomeScreen = ({ navigation }) => {
             marginRight: 20,
           }}
         >
-          <TouchableOpacity
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
-            activeOpacity={0.5}
-          >
+          <TouchableOpacity activeOpacity={0.5}>
             <AntDesign
               style={{ marginRight: 10 }}
               name="camerao"
               size={24}
               color="black"
             />
+          </TouchableOpacity>
+          <TouchableOpacity activeOpacity={0.5}>
             <SimpleLineIcons name="pencil" size={24} color="black" />
           </TouchableOpacity>
         </View>
       ),
     });
-  }, []);
+  }, [navigation]);
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <ScrollView>
