@@ -12,7 +12,7 @@ import tw from "twrnc";
 
 import { StatusBar } from "expo-status-bar";
 import { auth } from "../firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 const LoginScreen = ({ navigation }) => {
   const [email, setEmial] = useState("");
   const [password, setPassword] = useState("");
@@ -30,7 +30,11 @@ const LoginScreen = ({ navigation }) => {
       unsubscribe();
     };
   }, []);
-  const signIn = () => {};
+  const signIn = () => {
+    signInWithEmailAndPassword(auth, email, password).catch((error) =>
+      alert(error)
+    );
+  };
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <KeyboardAvoidingView
@@ -56,12 +60,13 @@ const LoginScreen = ({ navigation }) => {
               type="Email"
             />
             <Input
-              onTextInput={(text) => setPassword(text)}
+              onChangeText={(text) => setPassword(text.toString())}
               value={password}
               placeholder="Password"
               secureTextEntry
               autoFocus
               type="Password"
+              onSubmitEditing={signIn}
             />
           </View>
           <View>
@@ -96,3 +101,5 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 });
+
+//        onTextInput={(text) => setPassword(text.toString())}

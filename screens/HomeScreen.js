@@ -16,7 +16,7 @@ const HomeScreen = ({ navigation }) => {
   const handleSignIut = () => {
     signOut(auth)
       .then(() => {
-        navigation.navigate("Register");
+        navigation.navigate("Login");
       })
       .catch((error) => {
         console.log(error);
