@@ -1,9 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useLayoutEffect } from "react";
 
-const AddChatScreen = () => {
+const AddChatScreen = ({ navigation }) => {
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: "Add a new Chat",
+    });
+  }, [navigation]);
   return (
-    <View>
+    <View style={styles.container}>
       <Text>AddChatScreen</Text>
     </View>
   );
@@ -11,4 +16,6 @@ const AddChatScreen = () => {
 
 export default AddChatScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {},
+});
