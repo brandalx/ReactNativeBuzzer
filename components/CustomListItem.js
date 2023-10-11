@@ -3,7 +3,11 @@ import React from "react";
 import { ListItem, Avatar } from "react-native-elements";
 const CustomListItem = ({ id, chatName, enterChat }) => {
   return (
-    <ListItem containerStyle={{ backgroundColor: "white", width: "100%" }}>
+    <ListItem
+      key={id}
+      bottomDivider
+      containerStyle={{ backgroundColor: "white", width: "100%" }}
+    >
       <Avatar
         rounded
         source={{
@@ -11,7 +15,9 @@ const CustomListItem = ({ id, chatName, enterChat }) => {
         }}
       />
       <ListItem.Content>
-        <ListItem.Title style={{ fontWeight: "800" }}>User name</ListItem.Title>
+        <ListItem.Title style={{ fontWeight: "800" }}>
+          {chatName}
+        </ListItem.Title>
         <ListItem.Subtitle numberOfLines={1} ellipsizeMode="tail">
           This is Test Subtitle Test SubtitleTest for length
         </ListItem.Subtitle>

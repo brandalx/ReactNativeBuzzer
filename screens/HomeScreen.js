@@ -6,14 +6,17 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useEffect, useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Avatar, Button } from "react-native-elements";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import CustomListItem from "../components/CustomListItem";
 import { AntDesign, SimpleLineIcons } from "@expo/vector-icons";
+import { collection, addDoc, onSnapshot, query } from "firebase/firestore";
 
 const HomeScreen = ({ navigation }) => {
+  const [chats, setChats] = useState([]);
+
   const handleSignIut = () => {
     signOut(auth)
       .then(() => {
@@ -31,6 +34,21 @@ const HomeScreen = ({ navigation }) => {
         navigation.replace("Login");
         console.log(user);
       }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  useEffect(() => {
+    const chatCollection = collection(db, "chats");
+    const unsubscribe = onSnapshot(query(chatCollection), (snapshot) => {
+      const newChats = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        data: doc.data(),
+      }));
+      setChats(newChats);
     });
 
     return () => {
@@ -80,7 +98,9 @@ const HomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <ScrollView>
-        <CustomListItem />
+        {chats.map(({ id, data: { chatName } }) => (
+          <CustomListItem id={id} chatName={chatName} key={id} />
+        ))}
       </ScrollView>
       <Button title="Logout" onPress={handleSignIut} />
     </SafeAreaView>

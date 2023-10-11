@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Button, Icon, Input } from "react-native-elements";
 import { auth, db } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
@@ -27,6 +27,7 @@ const AddChatScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Input
+        onSubmitEditing={createChat}
         value={input}
         onChangeText={(text) => setInput(text)}
         leftIcon={
@@ -42,5 +43,9 @@ const AddChatScreen = ({ navigation }) => {
 export default AddChatScreen;
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    backgroundColor: "white",
+    padding: 30,
+    height: "100%",
+  },
 });
