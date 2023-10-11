@@ -67,7 +67,10 @@ const HomeScreen = ({ navigation }) => {
               color="black"
             />
           </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.5}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("AddChat")}
+            activeOpacity={0.5}
+          >
             <SimpleLineIcons name="pencil" size={24} color="black" />
           </TouchableOpacity>
         </View>
@@ -77,10 +80,6 @@ const HomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <ScrollView>
-        <CustomListItem />
-        <CustomListItem />
-        <CustomListItem />
-        <CustomListItem />
         <CustomListItem />
       </ScrollView>
       <Button title="Logout" onPress={handleSignIut} />
