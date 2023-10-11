@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { useLayoutEffect, useState } from "react";
-import { Input } from "react-native-elements";
+import { Button, Icon, Input } from "react-native-elements";
+import { auth, db } from "../firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 const AddChatScreen = ({ navigation }) => {
   const [input, setInput] = useState("");
@@ -10,13 +12,29 @@ const AddChatScreen = ({ navigation }) => {
       headerBackTitle: "Chats",
     });
   }, [navigation]);
+
+  const createChat = async () => {
+    try {
+      await addDoc(collection(db, "chats"), {
+        chatName: input,
+      });
+      navigation.goBack();
+    } catch (error) {
+      alert(error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Input
         value={input}
-        onChange={(text) => setInput(text)}
+        onChangeText={(text) => setInput(text)}
+        leftIcon={
+          <Icon name="wechat" type="antdesign" size={24} color="black" />
+        }
         placeholder="Enter a chat name"
       />
+      <Button onPress={createChat} title="Create new chat" />
     </View>
   );
 };
