@@ -17,6 +17,7 @@ const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState(true);
   useLayoutEffect(() => {
     navigation.setOptions({ headerBackTitle: " Login" });
   }, [navigation]);
@@ -55,11 +56,20 @@ const RegisterScreen = ({ navigation }) => {
             onChangeText={(text) => setEmail(text)}
           />
           <Input
-            secureTextEntry={true}
+            secureTextEntry={isPasswordVisible}
             placeholder="Password"
             type="password"
             value={password}
             onChangeText={(text) => setPassword(text.toString())}
+            rightIcon={{
+              type: "feather",
+              name: isPasswordVisible ? "eye" : "eye-off", // Using feather
+
+              color: "gray",
+              size: 24,
+              style: { marginRight: 10 },
+              onPress: () => setIsPasswordVisible((prev) => !prev),
+            }}
           />
           <Input
             placeholder="Profile picture URL (optional)"
@@ -88,9 +98,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "white",
   },
-  inputContainer: { width: 200 },
-  button: { width: 200, marginTop: 10 },
+  inputContainer: { width: 300 },
+  button: { width: 200 },
 });
 
 //for future usage

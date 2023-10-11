@@ -9,13 +9,14 @@ import {
 import React, { useEffect, useState } from "react";
 import { Button, Input, Image } from "react-native-elements";
 import tw from "twrnc";
-
+import { Icon } from "react-native-elements";
 import { StatusBar } from "expo-status-bar";
 import { auth } from "../firebase";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 const LoginScreen = ({ navigation }) => {
   const [email, setEmial] = useState("");
   const [password, setPassword] = useState("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState(true);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       console.log(user);
@@ -63,10 +64,19 @@ const LoginScreen = ({ navigation }) => {
               onChangeText={(text) => setPassword(text.toString())}
               value={password}
               placeholder="Password"
-              secureTextEntry
               autoFocus
+              secureTextEntry={isPasswordVisible}
               type="Password"
               onSubmitEditing={signIn}
+              rightIcon={{
+                type: "feather",
+                name: isPasswordVisible ? "eye" : "eye-off", // Using feather
+
+                color: "gray",
+                size: 24,
+                style: { marginRight: 10 },
+                onPress: () => setIsPasswordVisible((prev) => !prev),
+              }}
             />
           </View>
           <View>
