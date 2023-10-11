@@ -9,7 +9,7 @@ import LoginScreen from "./screens/LoginScreen";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import RegisterScreen from "./screens/RegisterScreen";
 import HomeScreen from "./screens/HomeScreen";
-import AddChat from "./screens/AddChat";
+import AddChatScreen from "./screens/AddChatScreen";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -34,7 +34,7 @@ export default function App() {
             />
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Register" component={RegisterScreen} />
-            <Stack.Screen name="AddChat" component={AddChat} />
+            <Stack.Screen name="AddChat" component={AddChatScreen} />
           </Stack.Navigator>
           {/* <View style={styles.container}>
         <Text>APP WORK TEST</Text>
