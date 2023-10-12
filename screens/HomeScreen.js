@@ -64,7 +64,14 @@ const HomeScreen = ({ navigation }) => {
       headerLeft: () => (
         <View style={{ marginLeft: 20 }}>
           <TouchableOpacity activeOpacity={0.5}>
-            <Avatar source={{ uri: auth?.currentUser?.photoURL }} rounded />
+            <Avatar
+              source={{
+                uri:
+                  auth?.currentUser?.photoURL ||
+                  "https://m.media-amazon.com/images/M/MV5BMTQzMjkwNTQ2OF5BMl5BanBnXkFtZTgwNTQ4MTQ4MTE@._V1_.jpg",
+              }}
+              rounded
+            />
           </TouchableOpacity>
         </View>
       ),
