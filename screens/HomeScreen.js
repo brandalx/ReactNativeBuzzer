@@ -96,11 +96,23 @@ const HomeScreen = ({ navigation }) => {
     });
   }, [navigation]);
 
+  const onEnterChat = (id, chatName) => {
+    navigation.navigate("Chat", {
+      id,
+      chatName,
+    });
+  };
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <ScrollView style={styles.container}>
         {chats.map(({ id, data: { chatName } }) => (
-          <CustomListItem id={id} chatName={chatName} key={id} />
+          <CustomListItem
+            enterChat={onEnterChat}
+            id={id}
+            chatName={chatName}
+            key={id}
+          />
         ))}
       </ScrollView>
       <Button title="Logout" onPress={handleSignIut} />
