@@ -4,6 +4,7 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
+  Platform,
 } from "react-native";
 import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
@@ -34,7 +35,62 @@ const RegisterScreen = ({ navigation }) => {
       .catch((error) => alert(error.message));
   };
 
-  return (
+  const isWeb = Platform.OS === "web";
+
+  return isWeb ? (
+    <View style={styles.container}>
+      <StatusBar style="light" />
+      <Text h3 style={{ marginBottom: 50 }}>
+        Create Buzzer Account
+      </Text>
+      <View style={styles.inputContainer}>
+        <Input
+          placeholder="Full Name"
+          autoFocus
+          type="text"
+          value={name}
+          onChangeText={(text) => setName(text)}
+        />
+        <Input
+          placeholder="Email"
+          type="email"
+          value={email}
+          onChangeText={(text) => setEmail(text)}
+        />
+        <Input
+          secureTextEntry={isPasswordVisible}
+          placeholder="Password"
+          type="password"
+          value={password}
+          onChangeText={(text) => setPassword(text.toString())}
+          rightIcon={{
+            type: "feather",
+            name: isPasswordVisible ? "eye" : "eye-off", // Using feather
+
+            color: "gray",
+            size: 24,
+            style: { marginRight: 10 },
+            onPress: () => setIsPasswordVisible((prev) => !prev),
+          }}
+        />
+        <Input
+          placeholder="Profile picture URL (optional)"
+          type="text"
+          value={imageUrl}
+          onChangeText={(text) => setImageUrl(text)}
+          onSubmitEditing={register}
+        />
+      </View>
+
+      <Button
+        style={styles.button}
+        raised
+        title="Register"
+        onPress={register}
+      />
+      <View style={{ height: 100 }} />
+    </View>
+  ) : (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <StatusBar style="light" />

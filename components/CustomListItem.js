@@ -32,14 +32,15 @@ const CustomListItem = ({ id, chatName, enterChat }) => {
     <ListItem
       key={id}
       onPress={() => enterChat(id, chatName)}
-      key={id}
       bottomDivider
       containerStyle={{ backgroundColor: "white", width: "100%" }}
     >
       <Avatar
         rounded
         source={{
-          uri: "https://www.pngmart.com/files/23/Profile-PNG-HD.png",
+          uri:
+            chatMessages?.[0]?.photoURL ||
+            "https://www.pngmart.com/files/23/Profile-PNG-HD.png",
         }}
       />
       <ListItem.Content>
@@ -47,7 +48,7 @@ const CustomListItem = ({ id, chatName, enterChat }) => {
           {chatName}
         </ListItem.Title>
         <ListItem.Subtitle numberOfLines={1} ellipsizeMode="tail">
-          This is Test Subtitle Test SubtitleTest for length
+          {chatMessages?.[0]?.displayName}: {chatMessages?.[0]?.message}
         </ListItem.Subtitle>
       </ListItem.Content>
     </ListItem>
