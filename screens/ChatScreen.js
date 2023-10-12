@@ -10,11 +10,12 @@ import {
   View,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { Avatar, Icon } from "react-native-elements";
 import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
 
 const ChatScreen = ({ navigation, route }) => {
+  const [input, setInput] = useState("");
   useLayoutEffect(() => {
     navigation.setOptions({
       title: "Chat",
@@ -65,6 +66,7 @@ const ChatScreen = ({ navigation, route }) => {
       ),
     });
   }, [navigation]);
+  const sendMessage = () => {};
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <StatusBar style="light" />
@@ -76,7 +78,16 @@ const ChatScreen = ({ navigation, route }) => {
         <>
           <ScrollView>{/* chats */}</ScrollView>
           <View style={styles.footer}>
-            <TextInput placeholder="Buzzer Message" />
+            <TextInput
+              value={input}
+              onChangeText={(text) => setInput(text)}
+              style={styles.textInput}
+              placeholder="Buzzer Message"
+            />
+
+            <TouchableOpacity onPress={sendMessage} activeOpacity={0.5}>
+              <Ionicons name="send" size={24} color="#2B68E6" />
+            </TouchableOpacity>
           </View>
         </>
       </KeyboardAvoidingView>
@@ -88,6 +99,23 @@ const ChatScreen = ({ navigation, route }) => {
 export default ChatScreen;
 
 const styles = StyleSheet.create({
-  container: {},
-  footer: {},
+  container: { flex: 1 },
+  footer: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+    padding: 15,
+  },
+  textInput: {
+    bottom: 0,
+    height: 40,
+    flex: 1,
+    marginRight: 15,
+    borderColor: "transparent",
+    backgroundColor: "#ECECEC",
+    borderWidth: 1,
+    padding: 10,
+    color: "grey",
+    borderRadius: 30,
+  },
 });
