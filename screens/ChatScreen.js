@@ -124,7 +124,21 @@ const ChatScreen = ({ navigation, route }) => {
         keyboardVerticalOffset={90}
       >
         <>
-          <ScrollView>{/* chats */}</ScrollView>
+          <ScrollView>
+            {messages.map(({ id, data }) =>
+              data.email === auth.currentUser.email ? (
+                <View style={styles.reciver} key={id}>
+                  <Avatar />
+                  <Text style={styles.reciverText}>{data.message}</Text>
+                </View>
+              ) : (
+                <View style={styles.sender} key={id}>
+                  <Avatar />
+                  <Text style={styles.senderText}>{data.message}</Text>
+                </View>
+              )
+            )}
+          </ScrollView>
           <View style={styles.footer}>
             <TextInput
               onSubmitEditing={sendMessage}
@@ -167,4 +181,8 @@ const styles = StyleSheet.create({
     color: "grey",
     borderRadius: 30,
   },
+  reciverText: {},
+  senderText: {},
+  reciver: {},
+  sender: {},
 });
