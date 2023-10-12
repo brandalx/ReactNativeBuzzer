@@ -20,6 +20,7 @@ import { TouchableWithoutFeedback } from "react-native";
 import { db, auth } from "../firebase";
 const ChatScreen = ({ navigation, route }) => {
   const [input, setInput] = useState("");
+  const [messages, setMessages] = useState([]);
   useLayoutEffect(() => {
     navigation.setOptions({
       title: "Chat",
@@ -91,6 +92,29 @@ const ChatScreen = ({ navigation, route }) => {
 
     setInput("");
   };
+
+  useLayoutEffect(() => {
+    const messagesCollection = collection(
+      db,
+      "chats",
+      route.params.id,
+      "messages"
+    );
+    const orderedQuery = query(
+      messagesCollection,
+      orderBy("timestamp", "desc")
+    );
+
+    const unsubscribe = onSnapshot(orderedQuery, (snapshot) => {
+      const newMessages = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        data: doc.data(),
+      }));
+      setMessages(newMessages);
+    });
+
+    return () => unsubscribe();
+  }, [route]);
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <StatusBar style="light" />
