@@ -1,4 +1,15 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { StatusBar } from "expo-status-bar";
 import React, { useLayoutEffect } from "react";
 import { Avatar, Icon } from "react-native-elements";
 import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
@@ -55,12 +66,28 @@ const ChatScreen = ({ navigation, route }) => {
     });
   }, [navigation]);
   return (
-    <View>
-      <Text>{route.params.chatName}</Text>
-    </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
+      <StatusBar style="light" />
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.container}
+        keyboardVerticalOffset={90}
+      >
+        <>
+          <ScrollView>{/* chats */}</ScrollView>
+          <View style={styles.footer}>
+            <TextInput placeholder="Buzzer Message" />
+          </View>
+        </>
+      </KeyboardAvoidingView>
+      {/* <Text>{route.params.chatName}</Text> */}
+    </SafeAreaView>
   );
 };
 
 export default ChatScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {},
+  footer: {},
+});
