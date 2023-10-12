@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useLayoutEffect } from "react";
-import { Avatar } from "react-native-elements";
+import { Avatar, Icon } from "react-native-elements";
+import { AntDesign } from "@expo/vector-icons";
 
 const ChatScreen = ({ navigation, route }) => {
   useLayoutEffect(() => {
@@ -20,6 +21,11 @@ const ChatScreen = ({ navigation, route }) => {
             {route.params.chatName}{" "}
           </Text>
         </View>
+      ),
+      headerLeft: () => (
+        <TouchableOpacity>
+          <AntDesign name="arrowleft" size={24} color="white" />
+        </TouchableOpacity>
       ),
     });
   }, [navigation]);
