@@ -45,7 +45,7 @@ const ChatScreen = ({ navigation, route }) => {
             rounded
             source={{
               uri:
-                route.params.photoURL ||
+                messages[0]?.data.photoURL ||
                 "https://m.media-amazon.com/images/M/MV5BMTQzMjkwNTQ2OF5BMl5BanBnXkFtZTgwNTQ4MTQ4MTE@._V1_.jpg",
             }}
           />
@@ -80,7 +80,7 @@ const ChatScreen = ({ navigation, route }) => {
         </View>
       ),
     });
-  }, [navigation]);
+  }, [navigation, messages]);
 
   const sendMessage = () => {
     Keyboard.dismiss();
