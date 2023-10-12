@@ -14,7 +14,15 @@ import { StatusBar } from "expo-status-bar";
 import React, { useLayoutEffect, useState } from "react";
 import { Avatar, Icon } from "react-native-elements";
 import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
-import { collection, doc, addDoc, serverTimestamp } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  addDoc,
+  serverTimestamp,
+  query,
+  orderBy,
+  onSnapshot,
+} from "firebase/firestore";
 
 import { TouchableWithoutFeedback } from "react-native";
 import { db, auth } from "../firebase";
@@ -36,7 +44,9 @@ const ChatScreen = ({ navigation, route }) => {
           <Avatar
             rounded
             source={{
-              uri: "https://m.media-amazon.com/images/M/MV5BMTQzMjkwNTQ2OF5BMl5BanBnXkFtZTgwNTQ4MTQ4MTE@._V1_.jpg",
+              uri:
+                route.params.photoURL ||
+                "https://m.media-amazon.com/images/M/MV5BMTQzMjkwNTQ2OF5BMl5BanBnXkFtZTgwNTQ4MTQ4MTE@._V1_.jpg",
             }}
           />
           <Text style={{ color: "white", marginLeft: 10, fontWeight: "700" }}>
@@ -128,12 +138,38 @@ const ChatScreen = ({ navigation, route }) => {
             {messages.map(({ id, data }) =>
               data.email === auth.currentUser.email ? (
                 <View style={styles.reciver} key={id}>
-                  <Avatar />
+                  <Avatar
+                    size={30}
+                    containerStyle={{
+                      bottom: -15,
+                      right: -5,
+                      position: "absolute",
+                    }}
+                    rounded
+                    source={{
+                      uri:
+                        data.photoURL ||
+                        "https://m.media-amazon.com/images/M/MV5BMTQzMjkwNTQ2OF5BMl5BanBnXkFtZTgwNTQ4MTQ4MTE@._V1_.jpg",
+                    }}
+                  />
                   <Text style={styles.reciverText}>{data.message}</Text>
                 </View>
               ) : (
                 <View style={styles.sender} key={id}>
-                  <Avatar />
+                  <Avatar
+                    size={30}
+                    containerStyle={{
+                      bottom: -15,
+                      right: -5,
+                      position: "absolute",
+                    }}
+                    rounded
+                    source={{
+                      uri:
+                        data.photoURL ||
+                        "https://m.media-amazon.com/images/M/MV5BMTQzMjkwNTQ2OF5BMl5BanBnXkFtZTgwNTQ4MTQ4MTE@._V1_.jpg",
+                    }}
+                  />
                   <Text style={styles.senderText}>{data.message}</Text>
                 </View>
               )
@@ -183,6 +219,23 @@ const styles = StyleSheet.create({
   },
   reciverText: {},
   senderText: {},
-  reciver: {},
-  sender: {},
+  reciver: {
+    padding: 15,
+    backgroundColor: "#ECECEC",
+    alignSelf: "flex-end",
+    borderRadius: 20,
+    marginRight: 15,
+    marginBottom: 20,
+    maxWidth: "80%",
+    position: "relative",
+  },
+  sender: {
+    padding: 15,
+    backgroundColor: "#2B68E6",
+    alignSelf: "flex-start",
+    borderRadius: 20,
+    margin: 15,
+    maxWidth: "80%",
+    position: "relative",
+  },
 });
