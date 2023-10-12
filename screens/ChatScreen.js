@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useLayoutEffect } from "react";
 import { Avatar, Icon } from "react-native-elements";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
 
 const ChatScreen = ({ navigation, route }) => {
   useLayoutEffect(() => {
@@ -10,14 +10,19 @@ const ChatScreen = ({ navigation, route }) => {
       headerTitleVisible: false,
       headerTitleAlign: "left",
       headerTitle: () => (
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
           <Avatar
             rounded
             source={{
               uri: "https://m.media-amazon.com/images/M/MV5BMTQzMjkwNTQ2OF5BMl5BanBnXkFtZTgwNTQ4MTQ4MTE@._V1_.jpg",
             }}
           />
-          <Text style={{ color: "white", marginLeft: 10, fontWeight: "bold" }}>
+          <Text style={{ color: "white", marginLeft: 10, fontWeight: "700" }}>
             {route.params.chatName}{" "}
           </Text>
         </View>
@@ -29,6 +34,23 @@ const ChatScreen = ({ navigation, route }) => {
         >
           <AntDesign name="arrowleft" size={24} color="white" />
         </TouchableOpacity>
+      ),
+      headerRight: () => (
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            width: 80,
+            marginRight: 20,
+          }}
+        >
+          <TouchableOpacity>
+            <FontAwesome name="video-camera" size={24} color="white" />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Ionicons name="call" size={24} color="white" />
+          </TouchableOpacity>
+        </View>
       ),
     });
   }, [navigation]);
