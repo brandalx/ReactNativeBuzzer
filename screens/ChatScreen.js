@@ -23,7 +23,10 @@ const ChatScreen = ({ navigation, route }) => {
         </View>
       ),
       headerLeft: () => (
-        <TouchableOpacity>
+        <TouchableOpacity
+          style={{ marginLeft: 10 }}
+          onPress={navigation.goBack}
+        >
           <AntDesign name="arrowleft" size={24} color="white" />
         </TouchableOpacity>
       ),
