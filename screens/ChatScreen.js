@@ -1,4 +1,5 @@
 import {
+  Keyboard,
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
@@ -13,7 +14,10 @@ import { StatusBar } from "expo-status-bar";
 import React, { useLayoutEffect, useState } from "react";
 import { Avatar, Icon } from "react-native-elements";
 import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
+import { collection, doc, addDoc, serverTimestamp } from "firebase/firestore";
 
+import { TouchableWithoutFeedback } from "react-native";
+import { db, auth } from "../firebase";
 const ChatScreen = ({ navigation, route }) => {
   const [input, setInput] = useState("");
   useLayoutEffect(() => {
@@ -66,7 +70,27 @@ const ChatScreen = ({ navigation, route }) => {
       ),
     });
   }, [navigation]);
-  const sendMessage = () => {};
+
+  const sendMessage = () => {
+    Keyboard.dismiss();
+
+    const messagesCollection = collection(
+      db,
+      "chats",
+      route.params.id,
+      "messages"
+    );
+
+    addDoc(messagesCollection, {
+      timestamp: serverTimestamp(),
+      message: input,
+      displayName: auth.currentUser.displayName,
+      email: auth.currentUser.email,
+      photoURL: auth.currentUser.photoURL,
+    });
+
+    setInput("");
+  };
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <StatusBar style="light" />
@@ -79,6 +103,7 @@ const ChatScreen = ({ navigation, route }) => {
           <ScrollView>{/* chats */}</ScrollView>
           <View style={styles.footer}>
             <TextInput
+              onSubmitEditing={sendMessage}
               value={input}
               onChangeText={(text) => setInput(text)}
               style={styles.textInput}
@@ -113,7 +138,7 @@ const styles = StyleSheet.create({
     marginRight: 15,
     borderColor: "transparent",
     backgroundColor: "#ECECEC",
-    borderWidth: 1,
+
     padding: 10,
     color: "grey",
     borderRadius: 30,
