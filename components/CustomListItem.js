@@ -1,9 +1,36 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ListItem, Avatar } from "react-native-elements";
+
+import {
+  collection,
+  doc,
+  query,
+  orderBy,
+  onSnapshot,
+} from "firebase/firestore"; // New imports from Firestore
+import { db } from "../firebase";
+
 const CustomListItem = ({ id, chatName, enterChat }) => {
+  const [chatMessages, setChatMessages] = useState([]);
+
+  useEffect(() => {
+    const messagesCollection = collection(db, "chats", id, "messages");
+    const orderedQuery = query(
+      messagesCollection,
+      orderBy("timestamp", "desc")
+    );
+
+    const unsubscribe = onSnapshot(orderedQuery, (snapshot) => {
+      const newChatMessages = snapshot.docs.map((doc) => doc.data());
+      setChatMessages(newChatMessages);
+    });
+
+    return () => unsubscribe();
+  }, []);
   return (
     <ListItem
+      key={id}
       onPress={() => enterChat(id, chatName)}
       key={id}
       bottomDivider
