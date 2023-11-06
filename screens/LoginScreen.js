@@ -111,6 +111,7 @@ const LoginScreen = ({ navigation }) => {
           />
           <View style={tw`w-100`}>
             <Input
+              style={tw`rounded-3`}
               value={email}
               onChangeText={(text) => setEmial(text)}
               placeholder="Email"
