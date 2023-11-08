@@ -142,7 +142,7 @@ const LoginScreen = ({ navigation }) => {
           </View>
           <View style={tw`w-90 `}>
             <Button
-              buttonStyle={tw``}
+              buttonStyle={tw`bg-[#407BFF]`}
               onPress={signIn}
               style={tw`my-2 rounded-full overflow-hidden`}
               title="Login"
