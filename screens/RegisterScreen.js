@@ -37,22 +37,17 @@ const RegisterScreen = ({ navigation }) => {
         });
       })
       .catch((error) => {
-        let errorMessage = "Please try again"; // Default message
+        let errorMessage = "Please try again";
 
-        // Handle incorrect data error
         if (error.code === "auth/invalid-data") {
           errorMessage =
             "The data provided is incorrect. Please check and try again.";
-        }
-        // Handle email already in use error
-        else if (error.code === "auth/email-already-in-use") {
+        } else if (error.code === "auth/email-already-in-use") {
           errorMessage = "An account with this email already exists.";
         } else if (error.code === "auth/invalid-email") {
           errorMessage = "Invalid email";
         }
-        // You can add more else if cases for other error codes as needed
 
-        // Display the custom error message
         toast.show(errorMessage);
       });
   };
