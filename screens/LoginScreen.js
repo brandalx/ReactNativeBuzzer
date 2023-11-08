@@ -51,7 +51,7 @@ const LoginScreen = ({ navigation }) => {
         <StatusBar style="light" />
         <Image
           source={{
-            uri: "https://cdn-icons-png.flaticon.com/512/295/295128.png",
+            uri: "/images/login.png",
           }}
           style={{ width: 200, height: 200 }}
         />
@@ -101,14 +101,14 @@ const LoginScreen = ({ navigation }) => {
         // behavior={Platform Platform?.OS === "ios" ? "padding" : "height" :""}
         // keyboardVerticalOffset={Platform?.OS === "ios" ? -100 : 0}
       >
-        <View>
+        <View style={tw`w-100`}>
           <StatusBar style="light" />
-          <Image
-            source={{
-              uri: "https://cdn-icons-png.flaticon.com/512/295/295128.png",
-            }}
-            style={{ width: 200, height: 200 }}
-          />
+          <View style={tw`flex  justify-center items-center`}>
+            <Image
+              source={require("../assets/images/login.png")}
+              style={tw`my-2 w-[200px] h-[200px]`}
+            />
+          </View>
           <View style={tw`w-100`}>
             <Input
               style={tw`rounded-3`}
