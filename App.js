@@ -11,6 +11,7 @@ import RegisterScreen from "./screens/RegisterScreen";
 import HomeScreen from "./screens/HomeScreen";
 import AddChatScreen from "./screens/AddChatScreen";
 import ChatScreen from "./screens/ChatScreen";
+import { ToastProvider } from "react-native-toast-notifications";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -22,28 +23,30 @@ export default function App() {
   return (
     <>
       {/* <StatusBar style="auto" hidden={true} /> */}
-      <NavigationContainer>
-        <SafeAreaProvider>
-          <Stack.Navigator
-            screenOptions={globalScreenOptions}
-            initialRouteName="Home"
-          >
-            <Stack.Screen
-              name="Home"
-              // options={{ title: "Sign up" }}
-              component={HomeScreen}
-            />
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="Register" component={RegisterScreen} />
-            <Stack.Screen name="AddChat" component={AddChatScreen} />
-            <Stack.Screen name="Chat" component={ChatScreen} />
-          </Stack.Navigator>
-          {/* <View style={styles.container}>
+      <ToastProvider>
+        <NavigationContainer>
+          <SafeAreaProvider>
+            <Stack.Navigator
+              screenOptions={globalScreenOptions}
+              initialRouteName="Home"
+            >
+              <Stack.Screen
+                name="Home"
+                // options={{ title: "Sign up" }}
+                component={HomeScreen}
+              />
+              <Stack.Screen name="Login" component={LoginScreen} />
+              <Stack.Screen name="Register" component={RegisterScreen} />
+              <Stack.Screen name="AddChat" component={AddChatScreen} />
+              <Stack.Screen name="Chat" component={ChatScreen} />
+            </Stack.Navigator>
+            {/* <View style={styles.container}>
         <Text>APP WORK TEST</Text>
         <StatusBar style="auto" />
       </View> */}
-        </SafeAreaProvider>
-      </NavigationContainer>
+          </SafeAreaProvider>
+        </NavigationContainer>
+      </ToastProvider>
     </>
   );
 }

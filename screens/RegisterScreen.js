@@ -7,14 +7,17 @@ import {
   Platform,
 } from "react-native";
 import tw from "twrnc";
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Button, Image, Input, Text } from "react-native-elements";
 import { auth, db } from "../firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { useToast } from "react-native-toast-notifications";
 // import { auth } from "../firebase";
 
 const RegisterScreen = ({ navigation }) => {
+  const toast = useToast();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,7 +36,25 @@ const RegisterScreen = ({ navigation }) => {
             "https://cdn-icons-png.flaticon.com/512/1144/1144760.png",
         });
       })
-      .catch((error) => alert(error.message));
+      .catch((error) => {
+        let errorMessage = "Please try again"; // Default message
+
+        // Handle incorrect data error
+        if (error.code === "auth/invalid-data") {
+          errorMessage =
+            "The data provided is incorrect. Please check and try again.";
+        }
+        // Handle email already in use error
+        else if (error.code === "auth/email-already-in-use") {
+          errorMessage = "An account with this email already exists.";
+        } else if (error.code === "auth/invalid-email") {
+          errorMessage = "Invalid email";
+        }
+        // You can add more else if cases for other error codes as needed
+
+        // Display the custom error message
+        toast.show(errorMessage);
+      });
   };
 
   const isWeb = Platform.OS === "web";
