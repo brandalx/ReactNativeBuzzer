@@ -9,7 +9,7 @@ import {
 import tw from "twrnc";
 import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { Button, Input, Text } from "react-native-elements";
+import { Button, Image, Input, Text } from "react-native-elements";
 import { auth, db } from "../firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 // import { auth } from "../firebase";
@@ -95,10 +95,17 @@ const RegisterScreen = ({ navigation }) => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <StatusBar style="light" />
-        <Text h4 style={tw`mb-[50px] font-bold `}>
-          Create Buzzer Account
-        </Text>
+        <View style={tw`flex  justify-center items-center`}>
+          <Image
+            source={require("../assets/images/signup.png")}
+            style={tw`my-2 w-[200px] h-[200px]`}
+          />
+        </View>
+
         <View style={tw`w-90`}>
+          <Text h2 style={tw`pl-4 mb-[20px] text-[#407BFF] font-black `}>
+            Create Buzzer Account
+          </Text>
           <Input
             style={tw`rounded-full bg-[#FAFAFA] px-2 text-[16px]  `}
             inputContainerStyle={{ borderBottomWidth: 0 }}
