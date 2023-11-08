@@ -113,7 +113,7 @@ const LoginScreen = ({ navigation }) => {
           </View>
           <View style={tw`flex  w-90`}>
             <Input
-              style={tw`rounded-full bg-[#FAFAFA] px-2 `}
+              style={tw`rounded-full bg-[#FAFAFA] px-2 text-[16px]`}
               inputContainerStyle={{ borderBottomWidth: 0 }}
               value={email}
               onChangeText={(text) => setEmial(text)}
@@ -122,7 +122,7 @@ const LoginScreen = ({ navigation }) => {
               type="Email"
             />
             <Input
-              style={tw`rounded-l-full bg-[#FAFAFA] px-2`}
+              style={tw`rounded-l-full bg-[#FAFAFA] px-2 text-[16px]`}
               onChangeText={(text) => setPassword(text.toString())}
               inputContainerStyle={{ borderBottomWidth: 0 }}
               value={password}

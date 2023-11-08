@@ -6,6 +6,7 @@ import {
   Keyboard,
   Platform,
 } from "react-native";
+import tw from "twrnc";
 import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Button, Input, Text } from "react-native-elements";
@@ -94,11 +95,13 @@ const RegisterScreen = ({ navigation }) => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <StatusBar style="light" />
-        <Text h3 style={{ marginBottom: 50 }}>
+        <Text h4 style={tw`mb-[50px] font-bold `}>
           Create Buzzer Account
         </Text>
-        <View style={styles.inputContainer}>
+        <View style={tw`w-90`}>
           <Input
+            style={tw`rounded-full bg-[#FAFAFA] px-2 text-[16px]  `}
+            inputContainerStyle={{ borderBottomWidth: 0 }}
             placeholder="Full Name"
             autoFocus
             type="text"
@@ -106,6 +109,8 @@ const RegisterScreen = ({ navigation }) => {
             onChangeText={(text) => setName(text)}
           />
           <Input
+            style={tw`rounded-full bg-[#FAFAFA] px-2 text-[16px] `}
+            inputContainerStyle={{ borderBottomWidth: 0 }}
             placeholder="Email"
             type="email"
             value={email}
@@ -117,17 +122,20 @@ const RegisterScreen = ({ navigation }) => {
             type="password"
             value={password}
             onChangeText={(text) => setPassword(text.toString())}
+            style={tw`rounded-l-full bg-[#FAFAFA] px-2 text-[16px]`}
+            inputContainerStyle={{ borderBottomWidth: 0 }}
             rightIcon={{
               type: "feather",
-              name: isPasswordVisible ? "eye" : "eye-off", // Using feather
-
-              color: "gray",
-              size: 24,
-              style: { marginRight: 10 },
+              name: isPasswordVisible ? "eye" : "eye-off",
+              color: "#407BFF",
+              size: 20,
+              containerStyle: tw`rounded-r-full bg-[#FAFAFA] h-full w-full flex items-center justify-center pr-2 border-0 `,
               onPress: () => setIsPasswordVisible((prev) => !prev),
             }}
           />
           <Input
+            style={tw`rounded-full bg-[#FAFAFA] px-2 text-[16px] `}
+            inputContainerStyle={{ borderBottomWidth: 0 }}
             placeholder="Profile picture URL (optional)"
             type="text"
             value={imageUrl}
@@ -136,12 +144,15 @@ const RegisterScreen = ({ navigation }) => {
           />
         </View>
 
-        <Button
-          style={styles.button}
-          raised
-          title="Register"
-          onPress={register}
-        />
+        <View style={tw`w-90`}>
+          <Button
+            buttonStyle={tw`bg-[#407BFF]`}
+            onPress={register}
+            style={tw`my-2 rounded-full overflow-hidden`}
+            title="Sign Up"
+          />
+        </View>
+
         <View style={{ height: 100 }} />
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
