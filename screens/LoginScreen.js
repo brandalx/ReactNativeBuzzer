@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Platform,
+  TouchableOpacity,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Button, Input, Image } from "react-native-elements";
@@ -14,6 +15,7 @@ import { Icon } from "react-native-elements";
 import { StatusBar } from "expo-status-bar";
 import { auth } from "../firebase";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+
 const LoginScreen = ({ navigation }) => {
   const [email, setEmial] = useState("");
   const [password, setPassword] = useState("");
@@ -101,7 +103,7 @@ const LoginScreen = ({ navigation }) => {
         // behavior={Platform Platform?.OS === "ios" ? "padding" : "height" :""}
         // keyboardVerticalOffset={Platform?.OS === "ios" ? -100 : 0}
       >
-        <View style={tw`w-100`}>
+        <View style={tw`w-100 flex items-center`}>
           <StatusBar style="light" />
           <View style={tw`flex  justify-center items-center`}>
             <Image
@@ -109,9 +111,10 @@ const LoginScreen = ({ navigation }) => {
               style={tw`my-2 w-[200px] h-[200px]`}
             />
           </View>
-          <View style={tw`w-100`}>
+          <View style={tw`flex  w-90`}>
             <Input
-              style={tw`rounded-3`}
+              style={tw`rounded-full bg-[#FAFAFA] px-2 `}
+              inputContainerStyle={{ borderBottomWidth: 0 }}
               value={email}
               onChangeText={(text) => setEmial(text)}
               placeholder="Email"
@@ -119,7 +122,9 @@ const LoginScreen = ({ navigation }) => {
               type="Email"
             />
             <Input
+              style={tw`rounded-l-full bg-[#FAFAFA] px-2`}
               onChangeText={(text) => setPassword(text.toString())}
+              inputContainerStyle={{ borderBottomWidth: 0 }}
               value={password}
               placeholder="Password"
               secureTextEntry={isPasswordVisible}
@@ -127,21 +132,31 @@ const LoginScreen = ({ navigation }) => {
               onSubmitEditing={signIn}
               rightIcon={{
                 type: "feather",
-                name: isPasswordVisible ? "eye" : "eye-off", // Using feather
-
-                color: "gray",
-                size: 24,
-                style: { marginRight: 10 },
+                name: isPasswordVisible ? "eye" : "eye-off",
+                color: "#407BFF",
+                size: 20,
+                containerStyle: tw`rounded-r-full bg-[#FAFAFA] h-full w-full flex items-center justify-center pr-2 border-0 `,
                 onPress: () => setIsPasswordVisible((prev) => !prev),
               }}
             />
           </View>
-          <View>
-            <Button onPress={signIn} style={tw`my-2`} title="Login" />
+          <View style={tw`w-90 `}>
             <Button
-              style={tw`my-2`}
-              title="Register"
-              type="outline"
+              buttonStyle={tw``}
+              onPress={signIn}
+              style={tw`my-2 rounded-full overflow-hidden`}
+              title="Login"
+            />
+
+            <Button
+              titleStyle={{
+                color: "#407BFF",
+                // fontSize: 30,
+                // fontStyle: "italic",
+              }}
+              buttonStyle={tw`bg-white border rounded-full`}
+              style={tw`my-2 rounded-full overflow-hidden bg-rose-500 text-black `}
+              title="Sign Up"
               onPress={() => navigation.navigate("Register")}
             />
             <View style={{ height: 200 }} />
@@ -166,6 +181,7 @@ const styles = StyleSheet.create({
   button: {
     width: 200,
     marginTop: 10,
+    borderRadius: 100,
   },
 });
 
