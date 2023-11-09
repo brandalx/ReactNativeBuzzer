@@ -5,7 +5,9 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Image,
 } from "react-native";
+import tw from "twrnc";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Avatar, Button } from "react-native-elements";
 import { auth, db } from "../firebase";
@@ -57,20 +59,21 @@ const HomeScreen = ({ navigation }) => {
   }, []);
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: "Buzzer",
-      headerStyle: { backgroundColor: "white" },
-      headerTitleStyle: { color: "black" },
-      headerTintColor: { color: "black" },
+      title: "Buzzer Chats",
+      headerStyle: { backgroundColor: "#407BFF" },
+      headerTitleStyle: { color: "white" },
+      headerTintColor: { color: "white" },
       headerLeft: () => (
         <View style={{ marginLeft: 20 }}>
           <TouchableOpacity activeOpacity={0.5}>
             <Avatar
+              // style={tw`h-[100px] w-[100px]`}
+              rounded
               source={{
                 uri:
                   auth?.currentUser?.photoURL ||
-                  "https://m.media-amazon.com/images/M/MV5BMTQzMjkwNTQ2OF5BMl5BanBnXkFtZTgwNTQ4MTQ4MTE@._V1_.jpg",
+                  "https://icon-library.com/images/no-user-image-icon/no-user-image-icon-23.jpg",
               }}
-              rounded
             />
           </TouchableOpacity>
         </View>
@@ -84,19 +87,19 @@ const HomeScreen = ({ navigation }) => {
             marginRight: 20,
           }}
         >
-          <TouchableOpacity activeOpacity={0.5}>
+          {/* <TouchableOpacity activeOpacity={0.5}>
             <AntDesign
               style={{ marginRight: 10 }}
               name="camerao"
               size={24}
               color="black"
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity
             onPress={() => navigation.navigate("AddChat")}
             activeOpacity={0.5}
           >
-            <SimpleLineIcons name="pencil" size={24} color="black" />
+            <SimpleLineIcons name="note" size={18} color="white" />
           </TouchableOpacity>
         </View>
       ),
@@ -111,7 +114,7 @@ const HomeScreen = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "white", width: "100%" }}>
       <ScrollView style={styles.container}>
         {chats.map(({ id, data: { chatName } }) => (
           <CustomListItem
@@ -122,7 +125,14 @@ const HomeScreen = ({ navigation }) => {
           />
         ))}
       </ScrollView>
-      <Button title="Logout" onPress={handleSignIut} />
+      <View style={tw`w-100 items-center justify-center`}>
+        <Button
+          buttonStyle={tw`bg-[#407BFF]`}
+          onPress={handleSignIut}
+          style={tw` w-90 rounded-full overflow-hidden`}
+          title="Sign Out"
+        />
+      </View>
     </SafeAreaView>
   );
 };

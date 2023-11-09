@@ -33,11 +33,21 @@ const RegisterScreen = ({ navigation }) => {
           displayName: name,
           photoURL:
             imageUrl ||
-            "https://cdn-icons-png.flaticon.com/512/1144/1144760.png",
+            "https://icon-library.com/images/no-user-image-icon/no-user-image-icon-23.jpg",
+        });
+      })
+      .then(() => {
+        toast.show("Welcome to Buzzer" + " " + name + "!", {
+          type: "success",
+          placement: "bottom",
+          duration: 4000,
+          offset: 30,
+          animationType: "slide-in",
         });
       })
       .catch((error) => {
         let errorMessage = "Please try again";
+        let word = "password";
 
         if (error.code === "auth/invalid-data") {
           errorMessage =
@@ -45,10 +55,18 @@ const RegisterScreen = ({ navigation }) => {
         } else if (error.code === "auth/email-already-in-use") {
           errorMessage = "An account with this email already exists.";
         } else if (error.code === "auth/invalid-email") {
-          errorMessage = "Invalid email";
+          errorMessage = "Sorry, the email is invalid.";
+        } else if (error.code.toLowerCase().includes(word.toLowerCase())) {
+          errorMessage = "Sorry, the password is invalid.";
         }
 
-        toast.show(errorMessage);
+        toast.show(errorMessage, {
+          type: "danger",
+          placement: "bottom",
+          duration: 4000,
+          offset: 30,
+          animationType: "slide-in",
+        });
       });
   };
 

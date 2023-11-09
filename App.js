@@ -1,7 +1,7 @@
 import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import { KeyboardAvoidingView, StyleSheet, Text, View } from "react-native";
-
+import { Icon } from "react-native-elements";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -23,7 +23,17 @@ export default function App() {
   return (
     <>
       {/* <StatusBar style="auto" hidden={true} /> */}
-      <ToastProvider>
+      <ToastProvider
+        successIcon={
+          <Icon name="checkcircle" type="antdesign" size={24} color="white" />
+        }
+        dangerIcon={
+          <Icon name="closecircle" type="antdesign" size={24} color="white" />
+        }
+        warningIcon={
+          <Icon name="warning" type="antdesign" size={24} color="white" />
+        }
+      >
         <NavigationContainer>
           <SafeAreaProvider>
             <Stack.Navigator
