@@ -38,14 +38,17 @@ const LoginScreen = ({ navigation }) => {
     };
   }, []);
   const signIn = () => {
-    signInWithEmailAndPassword(auth, email, password).catch((error) =>
-      toast.show("Something went wrong, please try again", {
-        type: "warning",
-        placement: "bottom",
-        duration: 4000,
-        offset: 30,
-        animationType: "slide-in",
-      })
+    signInWithEmailAndPassword(auth, email, password).catch(
+      (error) => (
+        console.log(error),
+        toast.show("Something went wrong, please try again", {
+          type: "warning",
+          placement: "bottom",
+          duration: 4000,
+          offset: 30,
+          animationType: "slide-in",
+        })
+      )
     );
   };
 

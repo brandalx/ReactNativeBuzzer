@@ -2,11 +2,11 @@ import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
   Image,
 } from "react-native";
+import { Text } from "react-native-elements";
 import tw from "twrnc";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Avatar, Button } from "react-native-elements";
@@ -116,21 +116,54 @@ const HomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white", width: "100%" }}>
       <ScrollView style={styles.container}>
-        {chats.map(({ id, data: { chatName } }) => (
-          <CustomListItem
-            enterChat={onEnterChat}
-            id={id}
-            chatName={chatName}
-            key={id}
-          />
-        ))}
+        {chats.length === 0 ? (
+          <>
+            <View style={tw`w-100 mt-[50%] flex items-center justify-center`}>
+              <Text h3 style={tw`pl-4 mb-[20px] text-[#407BFF] font-black `}>
+                No chats yet.
+              </Text>
+              <View>
+                <Image
+                  source={require("../assets/images/new.png")}
+                  style={tw`my-2 w-[200px] h-[200px]`}
+                />
+              </View>
+
+              <Button
+                buttonStyle={tw`bg-[#407BFF]`}
+                onPress={() => navigation.navigate("AddChat")}
+                style={tw` w-90 rounded-full overflow-hidden`}
+                title="Create First"
+              />
+            </View>
+          </>
+        ) : (
+          chats.map(({ id, data: { chatName } }) => (
+            <CustomListItem
+              enterChat={onEnterChat}
+              id={id}
+              chatName={chatName}
+              key={id}
+            />
+          ))
+        )}
       </ScrollView>
       <View style={tw`w-100 items-center justify-center`}>
-        <Button
+        {/* <Button
           buttonStyle={tw`bg-[#407BFF]`}
-          onPress={handleSignIut}
+         
           style={tw` w-90 rounded-full overflow-hidden`}
           title="Sign Out"
+        /> */}
+
+        <Button
+          titleStyle={{
+            color: "#407BFF",
+          }}
+          buttonStyle={tw`bg-white border rounded-full`}
+          style={tw`my-2 rounded-full overflow-hidden w-90 text-black `}
+          title="Sign Out"
+          onPress={handleSignIut}
         />
       </View>
     </SafeAreaView>
