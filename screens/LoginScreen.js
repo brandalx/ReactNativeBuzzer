@@ -1,6 +1,5 @@
 import {
   View,
-  Text,
   StyleSheet,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
@@ -8,6 +7,7 @@ import {
   Platform,
   TouchableOpacity,
 } from "react-native";
+import { Text } from "react-native-elements";
 import React, { useEffect, useState } from "react";
 import { Button, Input, Image } from "react-native-elements";
 import tw from "twrnc";
@@ -15,8 +15,10 @@ import { Icon } from "react-native-elements";
 import { StatusBar } from "expo-status-bar";
 import { auth } from "../firebase";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { useToast } from "react-native-toast-notifications";
 
 const LoginScreen = ({ navigation }) => {
+  const toast = useToast();
   const [email, setEmial] = useState("");
   const [password, setPassword] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(true);
@@ -36,7 +38,13 @@ const LoginScreen = ({ navigation }) => {
   }, []);
   const signIn = () => {
     signInWithEmailAndPassword(auth, email, password).catch((error) =>
-      alert(error)
+      toast.show("Something went wrong, please try again", {
+        type: "warning",
+        placement: "bottom",
+        duration: 4000,
+        offset: 30,
+        animationType: "slide-in",
+      })
     );
   };
 
@@ -103,9 +111,12 @@ const LoginScreen = ({ navigation }) => {
         // behavior={Platform Platform?.OS === "ios" ? "padding" : "height" :""}
         // keyboardVerticalOffset={Platform?.OS === "ios" ? -100 : 0}
       >
-        <View style={tw`w-100 flex items-center`}>
+        <View style={tw`w-100 mt-[30%] flex items-center justify-center`}>
           <StatusBar style="light" />
-          <View style={tw`flex  justify-center items-center`}>
+          <Text h2 style={tw`pl-4 mb-[20px] text-[#407BFF] font-black `}>
+            Login to Buzzer
+          </Text>
+          <View>
             <Image
               source={require("../assets/images/login.png")}
               style={tw`my-2 w-[200px] h-[200px]`}
