@@ -29,7 +29,7 @@ const AddChatScreen = ({ navigation }) => {
   return (
     <View style={tw`w-100 flex-1 bg-white flex items-center justify-center`}>
       <Text h3 style={tw`pl-4 mb-[20px] text-[#407BFF] font-black `}>
-        Enter a chat name
+        Create a new chat
       </Text>
       <View style={tw`px-2 w-full rounded-full`}>
         <Input
@@ -41,7 +41,7 @@ const AddChatScreen = ({ navigation }) => {
           leftIcon={
             <Icon name="wechat" type="antdesign" size={24} color="#407BFF" />
           }
-          placeholder="Provide chat name here"
+          placeholder="Enter a chat name here"
         />
       </View>
 
@@ -57,7 +57,7 @@ const AddChatScreen = ({ navigation }) => {
         disabled={!input}
         onPress={createChat}
         style={tw` w-90 rounded-full overflow-hidden`}
-        title="Create new chat"
+        title="Create"
       />
     </View>
   );

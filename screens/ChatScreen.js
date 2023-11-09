@@ -46,7 +46,7 @@ const ChatScreen = ({ navigation, route }) => {
             source={{
               uri:
                 messages[0]?.data.photoURL ||
-                "https://m.media-amazon.com/images/M/MV5BMTQzMjkwNTQ2OF5BMl5BanBnXkFtZTgwNTQ4MTQ4MTE@._V1_.jpg",
+                "https://icon-library.com/images/no-user-image-icon/no-user-image-icon-23.jpg",
             }}
           />
           <Text style={{ color: "white", marginLeft: 10, fontWeight: "700" }}>
@@ -71,12 +71,12 @@ const ChatScreen = ({ navigation, route }) => {
             marginRight: 20,
           }}
         >
-          <TouchableOpacity>
+          {/* <TouchableOpacity>
             <FontAwesome name="video-camera" size={24} color="white" />
           </TouchableOpacity>
           <TouchableOpacity>
             <Ionicons name="call" size={24} color="white" />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       ),
     });

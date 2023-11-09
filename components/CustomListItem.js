@@ -48,7 +48,9 @@ const CustomListItem = ({ id, chatName, enterChat }) => {
           {chatName}
         </ListItem.Title>
         <ListItem.Subtitle numberOfLines={1} ellipsizeMode="tail">
-          {chatMessages?.[0]?.displayName}: {chatMessages?.[0]?.message}
+          {chatMessages && chatMessages.length > 0
+            ? chatMessages?.[0]?.displayName + ": " + chatMessages[0].message
+            : "Start of the conversation"}
         </ListItem.Subtitle>
       </ListItem.Content>
     </ListItem>
