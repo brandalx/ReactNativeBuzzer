@@ -110,10 +110,7 @@ const ChatScreen = ({ navigation, route }) => {
       route.params.id,
       "messages"
     );
-    const orderedQuery = query(
-      messagesCollection,
-      orderBy("timestamp", "desc")
-    );
+    const orderedQuery = query(messagesCollection, orderBy("timestamp", "asc"));
 
     const unsubscribe = onSnapshot(orderedQuery, (snapshot) => {
       const newMessages = snapshot.docs.map((doc) => ({
