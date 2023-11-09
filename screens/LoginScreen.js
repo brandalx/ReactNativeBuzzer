@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Text } from "react-native-elements";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Button, Input, Image } from "react-native-elements";
 import tw from "twrnc";
 import { Icon } from "react-native-elements";
@@ -30,6 +30,7 @@ const LoginScreen = ({ navigation }) => {
         navigation.replace("Home");
         console.log(user);
       }
+      2;
     });
 
     return () => {
@@ -49,6 +50,12 @@ const LoginScreen = ({ navigation }) => {
   };
 
   const isWeb = Platform.OS === "web";
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: "Welcome to Buzzer",
+    });
+  }, [navigation]);
 
   return isWeb ? (
     <KeyboardAvoidingView

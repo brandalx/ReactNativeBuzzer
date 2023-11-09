@@ -24,7 +24,10 @@ const RegisterScreen = ({ navigation }) => {
   const [imageUrl, setImageUrl] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(true);
   useLayoutEffect(() => {
-    navigation.setOptions({ headerBackTitle: " Login" });
+    navigation.setOptions({
+      headerBackTitle: " Login",
+      title: "Sign up",
+    });
   }, [navigation]);
   const register = () => {
     createUserWithEmailAndPassword(auth, email, password)
