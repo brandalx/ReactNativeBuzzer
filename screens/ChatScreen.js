@@ -31,6 +31,7 @@ const ChatScreen = ({ navigation, route }) => {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [isAutoScrollActive, setIsAutoScrollActive] = useState(true);
+  const [lastScrollPosition, setLastScrollPosition] = useState(0);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -134,12 +135,16 @@ const ChatScreen = ({ navigation, route }) => {
   };
 
   const handleUserScroll = (event) => {
-    const y = event.nativeEvent.contentOffset.y;
+    const currentY = event.nativeEvent.contentOffset.y;
     const height = event.nativeEvent.layoutMeasurement.height;
     const contentHeight = event.nativeEvent.contentSize.height;
 
-    // Check if the user has scrolled up
-    if (y < contentHeight - height - 100) {
+    if (currentY < lastScrollPosition) {
+      Keyboard.dismiss();
+    }
+    setLastScrollPosition(currentY);
+
+    if (currentY < contentHeight - height - 100) {
       setIsAutoScrollActive(false);
     } else {
       setIsAutoScrollActive(true);
