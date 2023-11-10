@@ -141,7 +141,7 @@ const RegisterScreen = ({ navigation }) => {
 
         <View style={tw`w-90`}>
           <Text h2 style={tw`pl-4 mb-[20px] text-[#407BFF] font-black `}>
-            Create Buzzer Account
+            Create an Buzzer Account
           </Text>
           <Input
             style={tw`rounded-full bg-[#FAFAFA] px-2 text-[16px]  `}

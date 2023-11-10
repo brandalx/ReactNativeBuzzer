@@ -5,14 +5,15 @@ import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
-  Text,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
+import tw from "twrnc";
+import { Text } from "react-native-elements";
 import { StatusBar } from "expo-status-bar";
 import React, { useLayoutEffect, useState } from "react";
-import { Avatar, Icon } from "react-native-elements";
+import { Avatar, Icon, Image } from "react-native-elements";
 import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
 import {
   collection,
@@ -132,44 +133,63 @@ const ChatScreen = ({ navigation, route }) => {
       >
         <>
           <ScrollView contentContainerStyle={{ paddingTop: 15 }}>
-            {messages.map(({ id, data }) =>
-              data.email === auth.currentUser.email ? (
-                <View style={styles.reciver} key={id}>
-                  <Avatar
-                    size={30}
-                    containerStyle={{
-                      bottom: -15,
-                      right: -5,
-                      position: "absolute",
-                    }}
-                    rounded
-                    source={{
-                      uri:
-                        data.photoURL ||
-                        "https://m.media-amazon.com/images/M/MV5BMTQzMjkwNTQ2OF5BMl5BanBnXkFtZTgwNTQ4MTQ4MTE@._V1_.jpg",
-                    }}
+            {messages.length === 0 ? (
+              <View
+                style={tw`w-100 flex-1 bg-white flex items-center  justify-center`}
+              >
+                <View style={tw`flex flex-1 items-center pt-[30%]`}>
+                  <Image
+                    source={require("../assets/images/nomessage.png")}
+                    style={tw`my-2 w-[300px] h-[300px] rounded-full `}
                   />
-                  <Text style={styles.reciverText}>{data.message}</Text>
+                  <Text h3 style={tw`  text-[#407BFF] font-black `}>
+                    No messages yet
+                  </Text>
+                  <Text style={tw`text-center text-neutral-500`}>
+                    Be the first to start the conversation
+                  </Text>
                 </View>
-              ) : (
-                <View style={styles.sender} key={id}>
-                  <Avatar
-                    size={30}
-                    containerStyle={{
-                      bottom: -15,
-                      right: -5,
-                      position: "absolute",
-                    }}
-                    rounded
-                    source={{
-                      uri:
-                        data.photoURL ||
-                        "https://m.media-amazon.com/images/M/MV5BMTQzMjkwNTQ2OF5BMl5BanBnXkFtZTgwNTQ4MTQ4MTE@._V1_.jpg",
-                    }}
-                  />
-                  <Text style={styles.senderText}>{data.message}</Text>
-                  <Text style={styles.senderText}>{data.displayName}</Text>
-                </View>
+              </View>
+            ) : (
+              messages.map(({ id, data }) =>
+                data.email === auth.currentUser.email ? (
+                  <View style={styles.reciver} key={id}>
+                    <Avatar
+                      size={30}
+                      containerStyle={{
+                        bottom: -15,
+                        right: -5,
+                        position: "absolute",
+                      }}
+                      rounded
+                      source={{
+                        uri:
+                          data.photoURL ||
+                          "https://m.media-amazon.com/images/M/MV5BMTQzMjkwNTQ2OF5BMl5BanBnXkFtZTgwNTQ4MTQ4MTE@._V1_.jpg",
+                      }}
+                    />
+                    <Text style={styles.reciverText}>{data.message}</Text>
+                  </View>
+                ) : (
+                  <View style={styles.sender} key={id}>
+                    <Avatar
+                      size={30}
+                      containerStyle={{
+                        bottom: -15,
+                        right: -5,
+                        position: "absolute",
+                      }}
+                      rounded
+                      source={{
+                        uri:
+                          data.photoURL ||
+                          "https://m.media-amazon.com/images/M/MV5BMTQzMjkwNTQ2OF5BMl5BanBnXkFtZTgwNTQ4MTQ4MTE@._V1_.jpg",
+                      }}
+                    />
+                    <Text style={styles.senderText}>{data.message}</Text>
+                    <Text style={styles.senderText}>{data.displayName}</Text>
+                  </View>
+                )
               )
             )}
           </ScrollView>

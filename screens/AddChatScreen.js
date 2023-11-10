@@ -48,7 +48,7 @@ const AddChatScreen = ({ navigation }) => {
       <View>
         <Image
           source={require("../assets/images/send.png")}
-          style={tw`my-2 w-[200px] h-[200px]`}
+          style={tw`my-2 w-[300px] h-[300px]`}
         />
       </View>
 

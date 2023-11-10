@@ -6,6 +6,7 @@ import {
   View,
   Image,
 } from "react-native";
+
 import { Text } from "react-native-elements";
 import tw from "twrnc";
 import React, { useEffect, useLayoutEffect, useState } from "react";
@@ -18,6 +19,7 @@ import { collection, addDoc, onSnapshot, query } from "firebase/firestore";
 
 const HomeScreen = ({ navigation }) => {
   const [chats, setChats] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const handleSignIut = () => {
     signOut(auth)
@@ -51,6 +53,7 @@ const HomeScreen = ({ navigation }) => {
         data: doc.data(),
       }));
       setChats(newChats);
+      setLoading(false);
     });
 
     return () => {
@@ -116,7 +119,7 @@ const HomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white", width: "100%" }}>
       <ScrollView style={styles.container}>
-        {chats.length === 0 ? (
+        {chats.length === 0 && loading === false ? (
           <>
             <View style={tw`w-100 mt-[50%] flex items-center justify-center`}>
               <Text h3 style={tw`pl-4 mb-[20px] text-[#407BFF] font-black `}>
@@ -137,6 +140,10 @@ const HomeScreen = ({ navigation }) => {
               />
             </View>
           </>
+        ) : loading === true && chats.length === 0 ? (
+          <View>
+            <Text>Loading...</Text>
+          </View>
         ) : (
           chats.map(({ id, data: { chatName } }) => (
             <CustomListItem
@@ -148,6 +155,7 @@ const HomeScreen = ({ navigation }) => {
           ))
         )}
       </ScrollView>
+
       <View style={tw`w-100 items-center justify-center`}>
         {/* <Button
           buttonStyle={tw`bg-[#407BFF]`}
