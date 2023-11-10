@@ -10,6 +10,7 @@ import {
   onSnapshot,
 } from "firebase/firestore"; // New imports from Firestore
 import { db } from "../firebase";
+import tw from "twrnc";
 
 const CustomListItem = ({ id, chatName, enterChat }) => {
   const [chatMessages, setChatMessages] = useState([]);
@@ -48,9 +49,16 @@ const CustomListItem = ({ id, chatName, enterChat }) => {
           {chatName}
         </ListItem.Title>
         <ListItem.Subtitle numberOfLines={1} ellipsizeMode="tail">
-          {chatMessages && chatMessages.length > 0
-            ? chatMessages?.[0]?.displayName + ": " + chatMessages[0].message
-            : "Start of the conversation"}
+          {chatMessages && chatMessages.length > 0 ? (
+            <>
+              {chatMessages[0].displayName + ": "}
+              <Text style={tw`text-neutral-500`}>
+                {chatMessages[0].message}
+              </Text>
+            </>
+          ) : (
+            <Text style={tw`text-neutral-500`}>Start of the conversation</Text>
+          )}
         </ListItem.Subtitle>
       </ListItem.Content>
     </ListItem>

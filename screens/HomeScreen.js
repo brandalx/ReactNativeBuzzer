@@ -121,14 +121,14 @@ const HomeScreen = ({ navigation }) => {
       <ScrollView style={styles.container}>
         {chats.length === 0 && loading === false ? (
           <>
-            <View style={tw`w-100 mt-[50%] flex items-center justify-center`}>
-              <Text h3 style={tw`pl-4 mb-[20px] text-[#407BFF] font-black `}>
+            <View style={tw`w-100 mt-[35%] flex items-center justify-center`}>
+              <Text h3 style={tw`pl-4 mb-[1px] text-[#407BFF] font-black `}>
                 No chats yet.
               </Text>
               <View>
                 <Image
                   source={require("../assets/images/new.png")}
-                  style={tw`my-2 w-[200px] h-[200px]`}
+                  style={tw`my-2 w-[300px] h-[300px] r`}
                 />
               </View>
 
@@ -141,8 +141,18 @@ const HomeScreen = ({ navigation }) => {
             </View>
           </>
         ) : loading === true && chats.length === 0 ? (
-          <View>
-            <Text>Loading...</Text>
+          <View
+            style={tw`w-100 flex-1 bg-white flex items-center  justify-center`}
+          >
+            <View style={tw`flex flex-1 items-center pt-[30%]`}>
+              <Image
+                source={require("../assets/images/loading.png")}
+                style={tw`my-2 w-[300px] h-[300px]  `}
+              />
+              <Text h3 style={tw`  text-[#407BFF] font-black `}>
+                Loading Buzzer chats...
+              </Text>
+            </View>
           </View>
         ) : (
           chats.map(({ id, data: { chatName } }) => (

@@ -135,7 +135,7 @@ const RegisterScreen = ({ navigation }) => {
         <View style={tw`flex  justify-center items-center`}>
           <Image
             source={require("../assets/images/signup.png")}
-            style={tw`my-2 w-[200px] h-[200px]`}
+            style={tw`my-2 w-[300px] h-[300px]`}
           />
         </View>
 

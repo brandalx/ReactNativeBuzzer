@@ -236,12 +236,12 @@ const styles = StyleSheet.create({
     borderRadius: 30,
   },
   reciverText: {
-    color: "black",
+    color: "white",
     fontWeight: "500",
     marginLeft: 10,
   },
   senderText: {
-    color: "white",
+    color: "black",
     fontWeight: "500",
     marginLeft: 10,
     marginBottom: 15,
@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
   },
   reciver: {
     padding: 15,
-    backgroundColor: "#ECECEC",
+    backgroundColor: "#407BFF",
     alignSelf: "flex-end",
     borderRadius: 20,
     marginRight: 15,
@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
   },
   sender: {
     padding: 15,
-    backgroundColor: "#2B68E6",
+    backgroundColor: "#ECECEC",
     alignSelf: "flex-start",
     borderRadius: 20,
     margin: 15,

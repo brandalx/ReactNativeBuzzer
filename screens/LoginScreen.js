@@ -123,13 +123,13 @@ const LoginScreen = ({ navigation }) => {
       >
         <View style={tw`w-100 mt-[30%] flex items-center justify-center`}>
           <StatusBar style="light" />
-          <Text h2 style={tw`pl-4 mb-[20px] text-[#407BFF] font-black `}>
+          <Text h2 style={tw`pl-4  text-[#407BFF] font-black `}>
             Login to Buzzer
           </Text>
           <View>
             <Image
               source={require("../assets/images/login.png")}
-              style={tw`my-2 w-[200px] h-[200px]`}
+              style={tw`my-2 w-[300px] h-[300px]`}
             />
           </View>
           <View style={tw`flex  w-90`}>
