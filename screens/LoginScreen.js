@@ -118,12 +118,12 @@ const LoginScreen = ({ navigation }) => {
       <KeyboardAvoidingView
         style={styles.container}
         enabled
-        // behavior={Platform Platform?.OS === "ios" ? "padding" : "height" :""}
-        // keyboardVerticalOffset={Platform?.OS === "ios" ? -100 : 0}
+        behavior={Platform?.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform?.OS === "ios" ? -10 : 0}
       >
-        <View style={tw`w-100 mt-[30%] flex items-center justify-center`}>
+        <View style={tw`w-100 mt-[40%] flex items-center justify-center`}>
           <StatusBar style="light" />
-          <Text h2 style={tw`pl-4  text-[#407BFF] font-black `}>
+          <Text h2 style={tw`pl-4 mb-[10px] text-[#407BFF] font-black `}>
             Login to Buzzer
           </Text>
           <View>

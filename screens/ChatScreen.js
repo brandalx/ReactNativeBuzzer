@@ -12,7 +12,7 @@ import {
 import tw from "twrnc";
 import { Text } from "react-native-elements";
 import { StatusBar } from "expo-status-bar";
-import React, { useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import { Avatar, Icon, Image } from "react-native-elements";
 import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
 import {
@@ -30,6 +30,8 @@ import { db, auth } from "../firebase";
 const ChatScreen = ({ navigation, route }) => {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
+  const [isAutoScrollActive, setIsAutoScrollActive] = useState(true);
+
   useLayoutEffect(() => {
     navigation.setOptions({
       title: "Chat",
@@ -84,7 +86,7 @@ const ChatScreen = ({ navigation, route }) => {
   }, [navigation, messages]);
 
   const sendMessage = () => {
-    Keyboard.dismiss();
+    // Keyboard.dismiss();
 
     const messagesCollection = collection(
       db,
@@ -123,6 +125,27 @@ const ChatScreen = ({ navigation, route }) => {
 
     return () => unsubscribe();
   }, [route]);
+
+  const scrollViewRef = useRef();
+  const autoScrollToBottom = () => {
+    if (isAutoScrollActive) {
+      scrollViewRef.current.scrollToEnd({ animated: true });
+    }
+  };
+
+  const handleUserScroll = (event) => {
+    const y = event.nativeEvent.contentOffset.y;
+    const height = event.nativeEvent.layoutMeasurement.height;
+    const contentHeight = event.nativeEvent.contentSize.height;
+
+    // Check if the user has scrolled up
+    if (y < contentHeight - height - 100) {
+      setIsAutoScrollActive(false);
+    } else {
+      setIsAutoScrollActive(true);
+    }
+  };
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <StatusBar style="light" />
@@ -132,7 +155,13 @@ const ChatScreen = ({ navigation, route }) => {
         keyboardVerticalOffset={90}
       >
         <>
-          <ScrollView contentContainerStyle={{ paddingTop: 15 }}>
+          <ScrollView
+            ref={scrollViewRef}
+            contentContainerStyle={{ paddingTop: 15 }}
+            onContentSizeChange={() => autoScrollToBottom()}
+            onScroll={handleUserScroll}
+            scrollEventThrottle={16}
+          >
             {messages.length === 0 ? (
               <View
                 style={tw`w-100 flex-1 bg-white flex items-center  justify-center`}
@@ -186,8 +215,8 @@ const ChatScreen = ({ navigation, route }) => {
                           "https://m.media-amazon.com/images/M/MV5BMTQzMjkwNTQ2OF5BMl5BanBnXkFtZTgwNTQ4MTQ4MTE@._V1_.jpg",
                       }}
                     />
-                    <Text style={styles.senderText}>{data.message}</Text>
-                    <Text style={styles.senderText}>{data.displayName}</Text>
+                    <Text style={tw`font-bold`}>{data.message}</Text>
+                    <Text style={tw``}>{data.displayName}</Text>
                   </View>
                 )
               )
@@ -238,11 +267,10 @@ const styles = StyleSheet.create({
   reciverText: {
     color: "white",
     fontWeight: "500",
-    marginLeft: 10,
   },
   senderText: {
     color: "black",
-    fontWeight: "500",
+    fontWeight: "900",
     marginLeft: 10,
     marginBottom: 15,
   },
