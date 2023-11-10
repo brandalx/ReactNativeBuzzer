@@ -27,6 +27,7 @@ import {
 
 import { TouchableWithoutFeedback } from "react-native";
 import { db, auth } from "../firebase";
+import formatFirebaseTimestamp from "../helpers/dateformat";
 const ChatScreen = ({ navigation, route }) => {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
@@ -151,6 +152,10 @@ const ChatScreen = ({ navigation, route }) => {
     }
   };
 
+  // Example usage
+  const firebaseTimestamp = { nanoseconds: 410000000, seconds: 1699630227 };
+  console.log(formatFirebaseTimestamp(firebaseTimestamp));
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <StatusBar style="light" />
@@ -202,7 +207,11 @@ const ChatScreen = ({ navigation, route }) => {
                           "https://m.media-amazon.com/images/M/MV5BMTQzMjkwNTQ2OF5BMl5BanBnXkFtZTgwNTQ4MTQ4MTE@._V1_.jpg",
                       }}
                     />
+
                     <Text style={styles.reciverText}>{data.message}</Text>
+                    <Text style={tw` text-neutral-300`}>
+                      {formatFirebaseTimestamp(data.timestamp)}
+                    </Text>
                   </View>
                 ) : (
                   <View style={styles.sender} key={id}>
@@ -220,8 +229,14 @@ const ChatScreen = ({ navigation, route }) => {
                           "https://m.media-amazon.com/images/M/MV5BMTQzMjkwNTQ2OF5BMl5BanBnXkFtZTgwNTQ4MTQ4MTE@._V1_.jpg",
                       }}
                     />
-                    <Text style={tw`font-bold`}>{data.message}</Text>
-                    <Text style={tw``}>{data.displayName}</Text>
+
+                    <Text style={tw`font-bold`}>{data.displayName}</Text>
+                    <Text>{data.message}</Text>
+                    <Text style={tw` text-neutral-500`}>
+                      {data?.timestamp
+                        ? formatFirebaseTimestamp(data?.timestamp)
+                        : "Now"}
+                    </Text>
                   </View>
                 )
               )
@@ -290,8 +305,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#407BFF",
     alignSelf: "flex-end",
     borderRadius: 20,
-    marginRight: 15,
-    marginBottom: 20,
+    margin: 20,
+    marginBottom: 15,
+    marginTop: 15,
     maxWidth: "80%",
     position: "relative",
   },
@@ -300,7 +316,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#ECECEC",
     alignSelf: "flex-start",
     borderRadius: 20,
-    margin: 15,
+    margin: 20,
+    marginBottom: 15,
+    marginTop: 15,
     maxWidth: "80%",
     position: "relative",
   },

@@ -11,6 +11,7 @@ import {
 } from "firebase/firestore"; // New imports from Firestore
 import { db } from "../firebase";
 import tw from "twrnc";
+import formatFirebaseTimestamp from "../helpers/dateformat";
 
 const CustomListItem = ({ id, chatName, enterChat }) => {
   const [chatMessages, setChatMessages] = useState([]);
@@ -70,3 +71,5 @@ export default CustomListItem;
 const styles = StyleSheet.create({});
 
 // chatMessages?.[0].photoURL ||
+
+// formatFirebaseTimestamp
